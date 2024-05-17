@@ -8,7 +8,7 @@ The bootloader receives a packet from the host over uart (with dma) and start pr
 
 flasher.py scirpt reads the hex image of the program to be written in flash and sends its content divided into 4-words chunks. If an ACK is sent by the bootloader, then the 4 words are written and the script reads the next 4 words, otherwise a NACK is sent and the script stops reading.
 
-For testing, write the bootloader image (boot.bin) at the beginning of the flash (0x08000000) and run the script as follows (# replace com3 with your usb port):
+For testing, write the bootloader image (boot.bin) at the beginning of the flash (0x08000000) and run the script as follows (replace com3 with your usb port):
 ```python
 python flasher.py com3 test.hex
 ```

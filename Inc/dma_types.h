@@ -50,9 +50,9 @@ typedef struct
 /* DMA */
 typedef struct
 {
-	uint32_t ISR;
-	uint32_t IFCR;
-	DmaChnl_t Chnls[7];
+	volatile uint32_t ISR;
+	volatile uint32_t IFCR;
+	volatile DmaChnl_t Chnls[7];
 }Dma_t;
 
 

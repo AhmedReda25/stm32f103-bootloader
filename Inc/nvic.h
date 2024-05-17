@@ -16,24 +16,24 @@
 
 typedef struct
 {
-	uint32_t ISER[8];        /* Set Enable          */
+	volatile uint32_t ISER[8];        /* Set Enable          */
 	uint32_t RESERVED0[24];	                       
-	uint32_t ICER[8];        /* Clear Enable        */
+	volatile uint32_t ICER[8];        /* Clear Enable        */
 	uint32_t RESERVED1[24];                        
-	uint32_t ISPR[8];        /* Set Pending         */
+	volatile uint32_t ISPR[8];        /* Set Pending         */
 	uint32_t RESERVED2[24];                        
-	uint32_t ICPR[8];        /* Clear Pending       */
+	volatile uint32_t ICPR[8];        /* Clear Pending       */
 	uint32_t RESERVED3[24];                        
-	uint32_t IABR[8];        /* Active Bit          */
+	volatile uint32_t IABR[8];        /* Active Bit          */
 	uint32_t RESERVED4[56];
-	uint8_t  IPR[240];       /* Interrupt Priority  */
+	volatile uint8_t  IPR[240];       /* Interrupt Priority  */
 	uint32_t RESERVED5[644];
-	uint32_t STIR;           /* Software Trigger    */
+	volatile uint32_t STIR;           /* Software Trigger    */
 }NVIC_t;
 
 typedef enum
 {
-		WWDG_IRQ = 0,
+	WWDG_IRQ = 0,
     PVD,
     TAMPER,
     RTC_IRQ,
@@ -44,7 +44,7 @@ typedef enum
     EXTI2,
     EXTI3,
     EXTI4,
-		DMA1_Channel1_IRQ,
+	DMA1_Channel1_IRQ,
     DMA1_Channel2_IRQ,
     DMA1_Channel3_IRQ,
     DMA1_Channel4_IRQ,
@@ -73,8 +73,8 @@ typedef enum
     USART1_IRQ,
     USART2_IRQ,
     USART3_IRQ,
-		EXTI15_10,
-		RTCAlarm,
+	EXTI15_10,
+	RTCAlarm,
     USBWakeUp
 }IRQ_t;
 

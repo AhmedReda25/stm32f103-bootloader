@@ -11,16 +11,16 @@
 /*--------------------------------------------------------------------------------------------------------*/
 typedef struct
 {
-	uint32_t CR;
-	uint32_t CFGR;
-	uint32_t CIR;
-	uint32_t APB2RSTR;
-	uint32_t APB1RSTR;
-	uint32_t AHBENR;
-	uint32_t APB2ENR;
-	uint32_t APB1ENR;
-	uint32_t BDCR;
-	uint32_t CSR;
+	volatile uint32_t CR;
+	volatile uint32_t CFGR;
+	volatile uint32_t CIR;
+	volatile uint32_t APB2RSTR;
+	volatile uint32_t APB1RSTR;
+	volatile uint32_t AHBENR;
+	volatile uint32_t APB2ENR;
+	volatile uint32_t APB1ENR;
+	volatile uint32_t BDCR;
+	volatile uint32_t CSR;
 }RCC_t;
 /*--------------------------------------------------------------------------------------------------------*/
 

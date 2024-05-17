@@ -1,6 +1,6 @@
 ## Basic bootloader for stm32f103c8t6 board
 
-A number of commands related to flash memory are supported such as locking, unlocking flash, erasing pages...etc. the Most important commands are writing to flash and jumping to another location. User app is written at the beginning of page 32 (0x08008000) but any address in flash address space can be chosen.
+A number of commands related to flash memory are supported such as locking, unlocking flash, erasing pages...etc. The most important commands are writing to flash and jumping to another location. User app is written at the beginning of page 32 (0x08008000) but any address in flash address space can be chosen.
 
 The bootloader receives a packet from the host over uart (with dma) and start processing, then it start receiving the next packet. idle line detection interrupt is used to indicate that a command packet is fully received. a command packet consists of a command plus a number of bytes (dpending on the command). for example write command packet:
 |0x03 | address | word1 | word2 | word3 | word4 |

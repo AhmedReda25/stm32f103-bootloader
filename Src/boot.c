@@ -10,27 +10,15 @@ uint8_t rx_dma_buf[128] = {0};
 uint8_t cmd_buf[128] = {0}; /* isolation for rx_dma_buf */
 uint32_t count; // number of characters received
 
-//void dma_tx_callback()
-//{
-////	UART_DMA_Send(&huart, inst, "Reda", );
-//	if(DMA1_GET_FLAG(DMA_CH4,TCIF))
-//		UART_Send(&huart, "done sending names", sizeof("done sending names"));
-//	if(DMA1_GET_FLAG(DMA_CH4,TEIF))
-//		UART_Send(&huart, "Error", sizeof("Error"));
-//
-//	DMA1_FLAG_CLEARALL(DMA_CH4);
-//}
 
 void clock_init()
 {
-	/* HSE (8MHz) and PLL multiply *2 */
+	/* HSI (8MHz) */
 	RCC_OscConfig_t osc_config = {0};
 
 	osc_config.OscType = OSC_TYPE_HSI;
 	osc_config.HSIState = HSI_ON;
 	osc_config.PLLState = PLL_NOT_USED;
-//	osc_config.PLLSrc = PLLSRC_HSE;
-//	osc_config.PLLMul = PLL_MUL2;
 
 	OscInit(&osc_config);
 
@@ -96,11 +84,8 @@ void dma_init()
 	uart_dma.mem_size = SIZE_BYTE;
 	uart_dma.perph_size = SIZE_BYTE;
 	uart_dma.ptr_incr = MEM_PTR_INC;
-	
-	//_NVIC_EnableIRQ(DMA1_Channel4_IRQ);
 
 	DMA_Init(&uart_dma);
-	//Set_DMA1_CallBack(DMA_CH4, dma_tx_callback);
 }
 
 void gpio_init(void)
@@ -132,8 +117,7 @@ static void process_command()
 
 	case BL_CMD_FLASH_WRTE: /* Send 4 words at a time to speed up flashing process */
 		addr = *( (uint32_t *)(cmd_buf + 1) );
-//		data = *( (uint32_t *)(cmd_buf + 5) );
-		Flash_Write_n_words(addr, cmd_buf + 5, 4);
+		Flash_Write_n_words(addr, cmd_buf + 5, 4); // 4 words at each packet
 		break;
 
 	case BL_CMD_FLASH_READ:
@@ -149,7 +133,7 @@ static void process_command()
 		break;
 
 	case BL_CMD_JUMP_TO_APP:
-		addr = USER_CODE_BASE_ADDRESS;
+		addr = USER_CODE_BASE_ADDRESS; // page 32
 
 		/* MSP initial */
 		uint32_t msp_reset_val = *( (uint32_t *)(addr) );

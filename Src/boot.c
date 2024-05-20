@@ -135,7 +135,7 @@ static void process_command()
 	case BL_CMD_JUMP_TO_APP:
 		addr = USER_CODE_BASE_ADDRESS; // page 32
 
-		/* MSP initial */
+		/* MSP reset value*/
 		uint32_t msp_reset_val = *( (uint32_t *)(addr) );
 
 		/* reset vector */
@@ -146,7 +146,10 @@ static void process_command()
 		__DMB();
 		_SCB_VTOR = addr;
 		__DSB();
-
+		
+		/* adjust msp value */
+		__set_MSP(msp_reset_val);
+		
 		app();
 
 	default:
